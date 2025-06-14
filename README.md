@@ -4,38 +4,67 @@
 
 [<img src="./assets/header_model_release.png" alt="BitNet Model on Hugging Face" width="800"/>](https://huggingface.co/microsoft/BitNet-b1.58-2B-4T)
 
-Try it out via this [demo](https://bitnet-demo.azurewebsites.net/), or build and run it on your own [CPU](https://github.com/microsoft/BitNet?tab=readme-ov-file#build-from-source) or [GPU](https://github.com/microsoft/BitNet/blob/main/gpu/README.md).
+**The official inference framework for 1-bit LLMs** - Run powerful language models on your CPU with unprecedented efficiency.
 
-bitnet.cpp is the official inference framework for 1-bit LLMs (e.g., BitNet b1.58). It offers a suite of optimized kernels, that support **fast** and **lossless** inference of 1.58-bit models on CPU and GPU (NPU support will coming next).
+## 🚀 Quick Start
 
-The first release of bitnet.cpp is to support inference on CPUs. bitnet.cpp achieves speedups of **1.37x** to **5.07x** on ARM CPUs, with larger models experiencing greater performance gains. Additionally, it reduces energy consumption by **55.4%** to **70.0%**, further boosting overall efficiency. On x86 CPUs, speedups range from **2.37x** to **6.17x** with energy reductions between **71.9%** to **82.2%**. Furthermore, bitnet.cpp can run a 100B BitNet b1.58 model on a single CPU, achieving speeds comparable to human reading (5-7 tokens per second), significantly enhancing the potential for running LLMs on local devices. Please refer to the [technical report](https://arxiv.org/abs/2410.16144) for more details.
+Try it out via this [demo](https://bitnet-demo.azurewebsites.net/), or build and run it on your own [CPU](#build-from-source) or [GPU](https://github.com/microsoft/BitNet/blob/main/gpu/README.md).
+
+```bash
+# Quick setup and run
+git clone --recursive https://github.com/microsoft/BitNet.git
+cd BitNet
+pip install -r requirements.txt
+python setup_env.py -md models/BitNet-b1.58-2B-4T -q i2_s
+python python/benchmarks/run_inference.py -m models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf -p "You are a helpful assistant" -cnv
+```
+
+## 📖 Overview
+
+bitnet.cpp is the official inference framework for 1-bit LLMs (e.g., BitNet b1.58). It offers a suite of optimized kernels, that support **fast** and **lossless** inference of 1.58-bit models on CPU and GPU (NPU support coming next).
+
+### Key Performance Metrics
+
+| Platform | Speedup | Energy Reduction |
+|----------|---------|------------------|
+| ARM CPUs | 1.37x - 5.07x | 55.4% - 70.0% |
+| x86 CPUs | 2.37x - 6.17x | 71.9% - 82.2% |
+
+bitnet.cpp can run a 100B BitNet b1.58 model on a single CPU, achieving speeds comparable to human reading (5-7 tokens per second). See the [technical report](https://arxiv.org/abs/2410.16144) for details.
+
+<details>
+<summary>📊 Performance Benchmarks</summary>
 
 <img src="./assets/m2_performance.jpg" alt="m2_performance" width="800"/>
-<img src="./assets/intel_performance.jpg" alt="m2_performance" width="800"/>
+<img src="./assets/intel_performance.jpg" alt="intel_performance" width="800"/>
 
 >The tested models are dummy setups used in a research context to demonstrate the inference performance of bitnet.cpp.
+</details>
 
-## Demo
+## 🎥 Demo
 
 A demo of bitnet.cpp running a BitNet b1.58 3B model on Apple M2:
 
 https://github.com/user-attachments/assets/7f46b736-edec-4828-b809-4be780a3e5b1
 
-## What's New:
+## 📰 What's New
 - 05/20/2025 [BitNet Official GPU inference kernel](https://github.com/microsoft/BitNet/blob/main/gpu/README.md) ![NEW](https://img.shields.io/badge/NEW-red)
 - 04/14/2025 [BitNet Official 2B Parameter Model on Hugging Face](https://huggingface.co/microsoft/BitNet-b1.58-2B-4T)
 - 02/18/2025 [Bitnet.cpp: Efficient Edge Inference for Ternary LLMs](https://arxiv.org/abs/2502.11880)
 - 11/08/2024 [BitNet a4.8: 4-bit Activations for 1-bit LLMs](https://arxiv.org/abs/2411.04965)
 - 10/21/2024 [1-bit AI Infra: Part 1.1, Fast and Lossless BitNet b1.58 Inference on CPUs](https://arxiv.org/abs/2410.16144)
+<details>
+<summary>View more updates</summary>
+
 - 10/17/2024 bitnet.cpp 1.0 released.
 - 03/21/2024 [The-Era-of-1-bit-LLMs__Training_Tips_Code_FAQ](https://github.com/microsoft/unilm/blob/master/bitnet/The-Era-of-1-bit-LLMs__Training_Tips_Code_FAQ.pdf)
 - 02/27/2024 [The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits](https://arxiv.org/abs/2402.17764)
 - 10/17/2023 [BitNet: Scaling 1-bit Transformers for Large Language Models](https://arxiv.org/abs/2310.11453)
+</details>
 
-## Acknowledgements
+## 🤖 Models
 
-This project is based on the [llama.cpp](https://github.com/ggerganov/llama.cpp) framework. We would like to thank all the authors for their contributions to the open-source community. Also, bitnet.cpp's kernels are built on top of the Lookup Table methodologies pioneered in [T-MAC](https://github.com/microsoft/T-MAC/). For inference of general low-bit LLMs beyond ternary models, we recommend using T-MAC.
-## Official Models
+### Official Models
 <table>
     </tr>
     <tr>
@@ -65,8 +94,8 @@ This project is based on the [llama.cpp](https://github.com/ggerganov/llama.cpp)
     </tr>
 </table>
 
-## Supported Models
-❗️**We use existing 1-bit LLMs available on [Hugging Face](https://huggingface.co/) to demonstrate the inference capabilities of bitnet.cpp. We hope the release of bitnet.cpp will inspire the development of 1-bit LLMs in large-scale settings in terms of model size and training tokens.**
+### Community Models
+> 💡 **Note**: We use existing 1-bit LLMs available on [Hugging Face](https://huggingface.co/) to demonstrate the inference capabilities of bitnet.cpp. We hope the release of bitnet.cpp will inspire the development of 1-bit LLMs in large-scale settings.
 
 <table>
     </tr>
@@ -153,186 +182,190 @@ This project is based on the [llama.cpp](https://github.com/ggerganov/llama.cpp)
     </tr>
 </table>
 
+## 📦 Installation
 
-
-## Installation
-
-### Requirements
+### System Requirements
 - python>=3.9
 - cmake>=3.22
 - clang>=18
-    - For Windows users, install [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/). In the installer, toggle on at least the following options(this also automatically installs the required additional tools like CMake):
-        -  Desktop-development with C++
-        -  C++-CMake Tools for Windows
-        -  Git for Windows
-        -  C++-Clang Compiler for Windows
-        -  MS-Build Support for LLVM-Toolset (clang)
-    - For Debian/Ubuntu users, you can download with [Automatic installation script](https://apt.llvm.org/)
+- conda (highly recommended)
 
-        `bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"`
-- conda (highly recommend)
+<details>
+<summary>📋 Platform-specific installation</summary>
 
-### Build from source
+**Windows:**
+Install [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with these components:
+- Desktop-development with C++
+- C++-CMake Tools for Windows
+- Git for Windows
+- C++-Clang Compiler for Windows
+- MS-Build Support for LLVM-Toolset (clang)
+
+**Linux (Debian/Ubuntu):**
+```bash
+bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+```
+</details>
+
+### Build from Source
 
 > [!IMPORTANT]
-> If you are using Windows, please remember to always use a Developer Command Prompt / PowerShell for VS2022 for the following commands. Please refer to the FAQs below if you see any issues.
+> Windows users: Always use Developer Command Prompt / PowerShell for VS2022. See [FAQ](#faq) for troubleshooting.
 
-1. Clone the repo
+#### 1️⃣ Clone the repository
 ```bash
 git clone --recursive https://github.com/microsoft/BitNet.git
 cd BitNet
 ```
-2. Install the dependencies
+
+#### 2️⃣ Set up environment
 ```bash
-# (Recommended) Create a new conda environment
+# Create conda environment (recommended)
 conda create -n bitnet-cpp python=3.9
 conda activate bitnet-cpp
 
+# Install dependencies
 pip install -r requirements.txt
 ```
-3. Build the project
+
+#### 3️⃣ Download model and build
 ```bash
-# Manually download the model and run with local path
+# Download the official model
 huggingface-cli download microsoft/BitNet-b1.58-2B-4T-gguf --local-dir models/BitNet-b1.58-2B-4T
+
+# Build with optimized kernel
 python setup_env.py -md models/BitNet-b1.58-2B-4T -q i2_s
-
 ```
-<pre>
-usage: setup_env.py [-h] [--hf-repo {1bitLLM/bitnet_b1_58-large,1bitLLM/bitnet_b1_58-3B,HF1BitLLM/Llama3-8B-1.58-100B-tokens,tiiuae/Falcon3-1B-Instruct-1.58bit,tiiuae/Falcon3-3B-Instruct-1.58bit,tiiuae/Falcon3-7B-Instruct-1.58bit,tiiuae/Falcon3-10B-Instruct-1.58bit}] [--model-dir MODEL_DIR] [--log-dir LOG_DIR] [--quant-type {i2_s,tl1}] [--quant-embd]
-                    [--use-pretuned]
+<details>
+<summary>Setup options</summary>
 
-Setup the environment for running inference
+| Option | Description |
+|--------|-------------|
+| `--hf-repo`, `-hr` | Download model directly from Hugging Face |
+| `--model-dir`, `-md` | Local directory containing the model |
+| `--quant-type`, `-q` | Quantization type: `i2_s` (recommended) or `tl1` |
+| `--use-pretuned`, `-p` | Use pre-optimized kernel parameters |
+</details>
+## 🔧 Usage
 
-optional arguments:
-  -h, --help            show this help message and exit
-  --hf-repo {1bitLLM/bitnet_b1_58-large,1bitLLM/bitnet_b1_58-3B,HF1BitLLM/Llama3-8B-1.58-100B-tokens,tiiuae/Falcon3-1B-Instruct-1.58bit,tiiuae/Falcon3-3B-Instruct-1.58bit,tiiuae/Falcon3-7B-Instruct-1.58bit,tiiuae/Falcon3-10B-Instruct-1.58bit}, -hr {1bitLLM/bitnet_b1_58-large,1bitLLM/bitnet_b1_58-3B,HF1BitLLM/Llama3-8B-1.58-100B-tokens,tiiuae/Falcon3-1B-Instruct-1.58bit,tiiuae/Falcon3-3B-Instruct-1.58bit,tiiuae/Falcon3-7B-Instruct-1.58bit,tiiuae/Falcon3-10B-Instruct-1.58bit}
-                        Model used for inference
-  --model-dir MODEL_DIR, -md MODEL_DIR
-                        Directory to save/load the model
-  --log-dir LOG_DIR, -ld LOG_DIR
-                        Directory to save the logging info
-  --quant-type {i2_s,tl1}, -q {i2_s,tl1}
-                        Quantization type
-  --quant-embd          Quantize the embeddings to f16
-  --use-pretuned, -p    Use the pretuned kernel parameters
-</pre>
-## Usage
-### Basic usage
+### Basic Inference
 ```bash
-# Run inference with the quantized model
-python run_inference.py -m models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf -p "You are a helpful assistant" -cnv
+# Run chat mode with the official model
+python python/benchmarks/run_inference.py -m models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf -p "You are a helpful assistant" -cnv
 ```
-<pre>
-usage: run_inference.py [-h] [-m MODEL] [-n N_PREDICT] -p PROMPT [-t THREADS] [-c CTX_SIZE] [-temp TEMPERATURE] [-cnv]
 
-Run inference
+### Quick Chat Interface
+```bash
+# Use the convenience script for optimized chat
+./bitnet-chat.sh
+```
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -m MODEL, --model MODEL
-                        Path to model file
-  -n N_PREDICT, --n-predict N_PREDICT
-                        Number of tokens to predict when generating text
-  -p PROMPT, --prompt PROMPT
-                        Prompt to generate text from
-  -t THREADS, --threads THREADS
-                        Number of threads to use
-  -c CTX_SIZE, --ctx-size CTX_SIZE
-                        Size of the prompt context
-  -temp TEMPERATURE, --temperature TEMPERATURE
-                        Temperature, a hyperparameter that controls the randomness of the generated text
-  -cnv, --conversation  Whether to enable chat mode or not (for instruct models.)
-                        (When this option is turned on, the prompt specified by -p will be used as the system prompt.)
-</pre>
+### Inference Options
 
-### Benchmark
-We provide scripts to run the inference benchmark providing a model.
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-m`, `--model` | Path to model file | Required |
+| `-p`, `--prompt` | System prompt or direct prompt | Required |
+| `-n`, `--n-predict` | Number of tokens to generate | 128 |
+| `-t`, `--threads` | Number of CPU threads | Auto |
+| `-cnv`, `--conversation` | Enable chat mode | False |
+| `-temp`, `--temperature` | Generation randomness (0.0-1.0) | 0.7 |
 
-```  
-usage: e2e_benchmark.py -m MODEL [-n N_TOKEN] [-p N_PROMPT] [-t THREADS]  
-   
-Setup the environment for running the inference  
-   
-required arguments:  
-  -m MODEL, --model MODEL  
-                        Path to the model file. 
-   
-optional arguments:  
-  -h, --help  
-                        Show this help message and exit. 
-  -n N_TOKEN, --n-token N_TOKEN  
-                        Number of generated tokens. 
-  -p N_PROMPT, --n-prompt N_PROMPT  
-                        Prompt to generate text from. 
-  -t THREADS, --threads THREADS  
-                        Number of threads to use. 
-```  
-   
-Here's a brief explanation of each argument:  
-   
-- `-m`, `--model`: The path to the model file. This is a required argument that must be provided when running the script.  
-- `-n`, `--n-token`: The number of tokens to generate during the inference. It is an optional argument with a default value of 128.  
-- `-p`, `--n-prompt`: The number of prompt tokens to use for generating text. This is an optional argument with a default value of 512.  
-- `-t`, `--threads`: The number of threads to use for running the inference. It is an optional argument with a default value of 2.  
-- `-h`, `--help`: Show the help message and exit. Use this argument to display usage information.  
-   
-For example:  
-   
-```sh  
-python utils/e2e_benchmark.py -m /path/to/model -n 200 -p 256 -t 4  
-```  
-   
-This command would run the inference benchmark using the model located at `/path/to/model`, generating 200 tokens from a 256 token prompt, utilizing 4 threads.  
+### Performance Benchmarking
 
-For the model layout that do not supported by any public model, we provide scripts to generate a dummy model with the given model layout, and run the benchmark on your machine:
+Run end-to-end benchmarks to measure performance:
 
 ```bash
-python utils/generate-dummy-bitnet-model.py models/bitnet_b1_58-large --outfile models/dummy-bitnet-125m.tl1.gguf --outtype tl1 --model-size 125M
+# Benchmark with specific parameters
+python utils/e2e_benchmark.py -m models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf -n 200 -p 512 -t 4
+```
 
-# Run benchmark with the generated model, use -m to specify the model path, -p to specify the prompt processed, -n to specify the number of token to generate
+**Benchmark Options:**
+- `-m`: Model file path (required)
+- `-n`: Tokens to generate (default: 128)
+- `-p`: Prompt length (default: 512)
+- `-t`: Thread count (default: 2)
+
+#### Testing Custom Model Configurations
+
+Generate dummy models for testing different architectures:
+
+```bash
+# Generate a 125M parameter test model
+python utils/generate-dummy-bitnet-model.py models/bitnet_b1_58-large \
+    --outfile models/dummy-bitnet-125m.tl1.gguf \
+    --outtype tl1 \
+    --model-size 125M
+
+# Benchmark the test model
 python utils/e2e_benchmark.py -m models/dummy-bitnet-125m.tl1.gguf -p 512 -n 128
 ```
 
-### Convert from `.safetensors` Checkpoints
+### Model Conversion
 
-```sh
-# Prepare the .safetensors model file
+Convert models from different formats:
+
+```bash
+# Convert from safetensors format
 huggingface-cli download microsoft/bitnet-b1.58-2B-4T-bf16 --local-dir ./models/bitnet-b1.58-2B-4T-bf16
-
-# Convert to gguf model
-python ./utils/convert-helper-bitnet.py ./models/bitnet-b1.58-2B-4T-bf16
+python ./python/converters/convert-helper-bitnet.py ./models/bitnet-b1.58-2B-4T-bf16
 ```
 
-### FAQ (Frequently Asked Questions)📌 
+## 📚 Documentation
 
-#### Q1: The build dies with errors building llama.cpp due to issues with std::chrono in log.cpp?
+| Document | Description |
+|----------|-------------|
+| [Setup Guide](SETUP_GUIDE.md) | Detailed installation and configuration |
+| [Project Structure](PROJECT_STRUCTURE.md) | Repository organization |
+| [Performance Analysis](PERFORMANCE_COMPARISON.md) | Detailed benchmarks and comparisons |
+| [BitNet Capabilities](BITNET_CAPABILITIES.md) | Use cases and deployment scenarios |
+| [API Documentation](docs/README.md) | Programming interfaces |
+| [GPU Support](gpu/README.md) | GPU inference setup |
 
-**A:**
-This is an issue introduced in recent version of llama.cpp. Please refer to this [commit](https://github.com/tinglou/llama.cpp/commit/4e3db1e3d78cc1bcd22bcb3af54bd2a4628dd323) in the [discussion](https://github.com/abetlen/llama-cpp-python/issues/1942) to fix this issue.
+## 🙏 Acknowledgements
 
-#### Q2: How to build with clang in conda environment on windows?
+This project is based on the [llama.cpp](https://github.com/ggerganov/llama.cpp) framework. We thank all the authors for their contributions to the open-source community. 
 
-**A:** 
-Before building the project, verify your clang installation and access to Visual Studio tools by running:
-```
+bitnet.cpp's kernels are built on top of the Lookup Table methodologies pioneered in [T-MAC](https://github.com/microsoft/T-MAC/). For inference of general low-bit LLMs beyond ternary models, we recommend using T-MAC.
+
+## ❓ FAQ
+
+<details>
+<summary><b>Q: Build fails with std::chrono errors in log.cpp?</b></summary>
+
+This is a known issue in recent llama.cpp versions. Apply this [fix](https://github.com/tinglou/llama.cpp/commit/4e3db1e3d78cc1bcd22bcb3af54bd2a4628dd323) from the [discussion](https://github.com/abetlen/llama-cpp-python/issues/1942).
+</details>
+
+<details>
+<summary><b>Q: How to build with clang in conda on Windows?</b></summary>
+
+1. First verify clang installation:
+```bash
 clang -v
 ```
 
-This command checks that you are using the correct version of clang and that the Visual Studio tools are available. If you see an error message such as:
-```
-'clang' is not recognized as an internal or external command, operable program or batch file.
-```
+2. If clang is not recognized, initialize VS tools:
 
-It indicates that your command line window is not properly initialized for Visual Studio tools.
-
-• If you are using Command Prompt, run:
-```
+**Command Prompt:**
+```cmd
 "C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat" -startdir=none -arch=x64 -host_arch=x64
 ```
 
-• If you are using Windows PowerShell, run the following commands:
+**PowerShell:**
+```powershell
+Import-Module "C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
+Enter-VsDevShell 3f0e31ad -SkipAutomaticLocation -DevCmdArguments "-arch=x64 -host_arch=x64"
 ```
-Import-Module "C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\Microsoft.VisualStudio.DevShell.dll" Enter-VsDevShell 3f0e31ad -SkipAutomaticLocation -DevCmdArguments "-arch=x64 -host_arch=x64"
-```
+</details>
 
-These steps will initialize your environment and allow you to use the correct Visual Studio tools.
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Code of Conduct](CODE_OF_CONDUCT.md) and [Security Policy](SECURITY.md) before contributing.
+
+## 📬 Contact
+
+For questions and support, please open an issue on our [GitHub repository](https://github.com/microsoft/BitNet/issues).

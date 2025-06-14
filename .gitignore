@@ -1,26 +1,27 @@
-# Extensions
-
+# Build artifacts
 *.a
-*.bat
-*.bin
+*.o
+*.so
 *.dll
-*.dot
-*.etag
+*.dylib
 *.exe
+*.metallib
+
+# Binary files
+*.bin
+*.gguf
+*.gguf.json
+
+# Temporary files
+*.tmp
+*.log
 *.gcda
 *.gcno
 *.gcov
-*.gguf
-*.gguf.json
+*.etag
 *.lastModified
-*.log
-*.metallib
-*.o
-*.so
-*.tmp
 
-# IDE / OS
-
+# IDE / Editor files
 .cache/
 .ccls-cache/
 .direnv/
@@ -31,17 +32,95 @@
 .vs/
 .vscode/
 nppBackup
-
-# Models
-models/*
-gpu/checkpoints/*
+*.swp
+*.swo
+*~
 
 # Python
-
-/.venv
 __pycache__/
-*/poetry.lock
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ENV/
+*.egg
+*.egg-info/
+dist/
+build/
+wheels/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.tox/
+poetry.lock
 poetry.toml
+.pytype/
 
+# Build directories
 build/
 logs/
+cmake-build-*/
+Debug/
+Release/
+
+# Model files (large binary files)
+models/*
+!models/.gitkeep
+gpu/checkpoints/*
+!gpu/checkpoints/.gitkeep
+
+# Log files
+*.log
+chat_logs/
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+_deps/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Documentation build
+docs/_build/
+docs/api/
+site/
+
+# Local scripts (if any contain sensitive data)
+*.local.sh
+*.private.*
+
+# Batch files (often contain local paths)
+*.bat
+
+# Local cmake directory
+cmake-local/
+
+# Kernel headers (generated)
+include/bitnet-lut-kernels.h
+include/kernel_config.ini

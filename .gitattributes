@@ -1,0 +1,54 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Explicitly declare text files
+*.py text
+*.cpp text
+*.c text
+*.h text
+*.hpp text
+*.cu text
+*.cuh text
+*.md text
+*.txt text
+*.sh text eol=lf
+*.yml text
+*.yaml text
+*.json text
+*.xml text
+*.cmake text
+CMakeLists.txt text
+
+# Declare files that will always have CRLF line endings on checkout
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files
+*.gguf binary
+*.bin binary
+*.model binary
+*.safetensors binary
+*.pt binary
+*.pth binary
+*.pkl binary
+*.pickle binary
+*.npy binary
+*.npz binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.so binary
+*.dylib binary
+*.dll binary
+*.exe binary
+*.a binary
+*.o binary
+
+# Large files (use Git LFS if needed)
+*.gguf filter=lfs diff=lfs merge=lfs -text
+*.safetensors filter=lfs diff=lfs merge=lfs -text
+*.pt filter=lfs diff=lfs merge=lfs -text
+*.pth filter=lfs diff=lfs merge=lfs -text
