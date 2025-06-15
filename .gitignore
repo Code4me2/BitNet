@@ -123,4 +123,4 @@ cmake-local/
 
 # Kernel headers (generated)
 include/bitnet-lut-kernels.h
-include/kernel_config.ini
+include/kernel_config.inibest_kernel_config.json

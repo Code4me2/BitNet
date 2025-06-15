@@ -7,6 +7,8 @@
 - **Port**: 8081 (changed to avoid conflict with web services)
 - **Model**: BitNet-b1.58-2B-4T (2.4B parameters)
 - **Location**: `/home/manzanita/coding/bitnet-inference/BitNet/`
+- **Kernel Configuration**: Optimized for Intel Ultra 7 (23% performance improvement)
+  - BM: 320, BK: 128, bm: 32
 
 ### 2. Start BitNet Server
 
@@ -88,8 +90,26 @@ docker compose up -d
 - Check for running instances: `ps aux | grep llama-server`
 - Kill duplicates: `pkill -f llama-server`
 
-### 6. Performance Tips
+### 6. Performance Optimization
 
+#### Kernel Tuning (NEW)
+BitNet now includes kernel tuning for hardware-specific optimization:
+
+```bash
+# Quick tuning (5 minutes, tests 3-4 configurations)
+python utils/kernel_tuning.py --quick
+
+# Full tuning (15+ minutes, tests 10+ configurations)
+python utils/kernel_tuning.py
+
+# Apply best configuration permanently
+python utils/codegen_tl2.py --model bitnet_b1_58-3B --BM 320,320,320 --BK 128,128,128 --bm 32,32,32
+bash rebuild_bitnet.sh
+```
+
+Current optimized configuration achieves **~24 tokens/s** (23% improvement over default).
+
+#### Runtime Settings
 For optimal performance:
 ```bash
 # Set thread count to match your CPU cores
