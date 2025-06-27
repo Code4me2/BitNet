@@ -22,7 +22,7 @@ class BitNetStreamingChat:
         self.settings = {
             "temperature": 0.7,
             "max_tokens": 200,
-            "threads": 12,
+            "threads": 10,  # Using 10 threads for optimal performance
             "top_k": 40,
             "top_p": 0.95,
             "repeat_penalty": 1.1

@@ -4,8 +4,8 @@
 echo "🚀 Starting BitNet Real-time Chat..."
 echo ""
 
-# Set thread optimization
-export OMP_NUM_THREADS=12
+# Set thread optimization (10 threads found to be optimal)
+export OMP_NUM_THREADS=10
 export PYTHONUNBUFFERED=1
 
 # Run the chat

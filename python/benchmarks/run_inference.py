@@ -17,7 +17,8 @@ def run_command(command, shell=False):
 def run_inference():
     # Auto-detect optimal thread count if not explicitly set
     if args.threads <= 0:
-        optimal_threads = min(multiprocessing.cpu_count(), 12)
+        # Using 10 threads for optimal performance
+        optimal_threads = min(multiprocessing.cpu_count(), 10)
         # Set environment variables for optimal performance
         os.environ['OMP_NUM_THREADS'] = str(optimal_threads)
         os.environ['MKL_NUM_THREADS'] = str(optimal_threads)

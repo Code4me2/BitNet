@@ -1,37 +1,60 @@
 # BitNet Documentation
 
-Welcome to the BitNet documentation! This directory contains all documentation organized by topic.
+Welcome to the BitNet inference server documentation. This guide will help you get started with BitNet and make the most of its capabilities.
 
-## Documentation Structure
+## 📚 Documentation Structure
 
-### 📚 [Guides](./guides/)
-- [Chat Interface Guide](./guides/chat.md) - How to use the chat interface
-- [Streaming Chat Guide](./guides/streaming_chat.md) - Guide for streaming chat implementation
-- [Threading Guide](./guides/threading.md) - Best practices for multi-threaded operations
+### Getting Started
+- [Installation Guide](./getting-started/installation.md) - Step-by-step installation instructions
+- [Setup Guide](./getting-started/setup-guide.md) - Detailed setup with model downloads
+- [Docker Setup](./getting-started/docker-status.md) - Docker configuration and current status
 
-### 🏗️ [Architecture](./architecture/)
-- [Cleanup Summary](./architecture/cleanup_summary.md) - Code cleanup and refactoring notes
-- [Threading Summary](./architecture/threading_summary.md) - Threading architecture overview
+### User Guides
+- [Chat Interface](./guides/chat.md) - Interactive chat functionality
+- [Streaming Chat](./guides/streaming_chat.md) - Real-time streaming responses
+- [Threading Guide](./guides/threading-guide.md) - CPU utilization and parallel processing
 
-### ⚡ [Optimization](./optimization/)
-- [Optimization Guide](./optimization/optimization_guide.md) - Performance optimization techniques
-- [Code Generation (TL1/TL2)](./codegen.md) - Kernel code generation documentation
+### Performance
+- [BitNet Capabilities](./performance/capabilities.md) - Where BitNet excels
+- [Performance Comparison](./performance/comparison.md) - BitNet vs other models
+- [Optimization Guide](./performance/optimization.md) - Performance tuning
+- [Kernel Tuning](./performance/kernel_tuning.md) - Hardware-specific optimizations
 
-### 🔧 API Documentation (Coming Soon)
-- Model API reference
-- Inference API reference
-- Utility functions reference
+### Architecture
+- [Project Structure](./architecture/project-structure.md) - Repository organization
+- [Cleanup Summary](./architecture/cleanup_summary.md) - Code organization details
 
-## Quick Links
+### Development
+- [Testing Guide](./development/testing.md) - Testing implementation
+- [Code Generation](./development/codegen.md) - Kernel code generation
 
-- [Main README](../README.md) - Project overview and quick start
-- [GPU Support](../gpu/README.md) - GPU acceleration documentation
-- [Security Policy](../SECURITY.md) - Security guidelines
-- [Code of Conduct](../CODE_OF_CONDUCT.md) - Community guidelines
+### Migration
+- [BitNet.cpp Migration](./migration/bitnet-cpp-migration.md) - Migration history and guide
 
-## Getting Started
+## 🚀 Quick Links
 
-If you're new to BitNet, we recommend starting with:
-1. The [main README](../README.md) for installation and basic usage
-2. The [Chat Interface Guide](./guides/chat.md) for interactive usage
-3. The [Optimization Guide](./optimization/optimization_guide.md) for performance tuning
+- **Quick Start**: See the main [README](../README.md) for quick start instructions
+- **API Reference**: Check the setup guide for API endpoint documentation
+- **Troubleshooting**: See the installation guide for common issues
+
+## 🔧 Key Features
+
+- **1-bit Quantization**: Extreme efficiency with minimal quality loss
+- **Optimized Kernels**: Hardware-specific kernels (I2_S, TL1, TL2)
+- **OpenAI-Compatible API**: Drop-in replacement for many applications
+- **Parallel Processing**: Efficient multi-prompt handling
+
+## 📊 Performance Highlights
+
+- **Speed**: 1.37x - 6.17x faster than llama.cpp
+- **Memory**: ~70% reduction in memory usage
+- **Energy**: Significant power consumption reduction
+- **Quality**: Comparable to full-precision models for many tasks
+
+## 🤝 Contributing
+
+See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to contribute to the project.
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](../../LICENSE) file for details.

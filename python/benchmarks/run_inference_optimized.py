@@ -15,9 +15,9 @@ def get_optimal_thread_count():
     # Get physical CPU count
     physical_cores = multiprocessing.cpu_count() // 2  # Assume hyperthreading
     
-    # For Intel CPUs with P-cores and E-cores, use total thread count
-    # Intel Core Ultra 7 155U has 12 threads total
-    return min(multiprocessing.cpu_count(), 12)
+    # For Intel CPUs with P-cores and E-cores, use optimal thread count
+    # Using 10 threads for optimal performance
+    return min(multiprocessing.cpu_count(), 10)
 
 def set_performance_env():
     """Set optimal environment variables for performance"""

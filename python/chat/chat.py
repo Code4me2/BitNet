@@ -15,8 +15,9 @@ class BitNetChat:
         self.system_prompt = "You are a helpful AI assistant."
         
         # Set environment variables for optimal performance
-        os.environ['OMP_NUM_THREADS'] = '12'
-        os.environ['MKL_NUM_THREADS'] = '12'
+        # Using 10 threads for optimal performance on this system
+        os.environ['OMP_NUM_THREADS'] = '10'
+        os.environ['MKL_NUM_THREADS'] = '10'
         
     def clear_screen(self):
         """Clear the terminal screen"""
@@ -58,12 +59,12 @@ class BitNetChat:
         
         # Run inference
         cmd = [
-            "python3", "run_inference.py",
+            "python3", "../benchmarks/run_inference.py",
             "-m", self.model_path,
             "-p", full_prompt,
             "-n", str(max_tokens),
             "-temp", str(temperature),
-            "-t", "12"
+            "-t", "10"  # Using 10 threads for optimal performance
         ]
         
         try:

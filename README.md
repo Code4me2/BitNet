@@ -327,13 +327,13 @@ python ./python/converters/convert-helper-bitnet.py ./models/bitnet-b1.58-2B-4T-
 
 | Document | Description |
 |----------|-------------|
-| [Setup Guide](SETUP_GUIDE.md) | Detailed installation and configuration |
-| [Kernel Tuning](docs/kernel_tuning.md) | Hardware-specific optimization guide |
-| [Project Structure](PROJECT_STRUCTURE.md) | Repository organization |
-| [Performance Analysis](PERFORMANCE_COMPARISON.md) | Detailed benchmarks and comparisons |
-| [BitNet Capabilities](BITNET_CAPABILITIES.md) | Use cases and deployment scenarios |
-| [API Documentation](docs/README.md) | Programming interfaces |
-| [GPU Support](gpu/README.md) | GPU inference setup |
+| [Documentation Index](docs/README.md) | Complete documentation guide |
+| [Installation Guide](docs/getting-started/installation.md) | Step-by-step installation |
+| [Setup Guide](docs/getting-started/setup-guide.md) | Model setup and configuration |
+| [Threading Guide](docs/guides/threading-guide.md) | CPU optimization and parallelization |
+| [Performance Guide](docs/performance/optimization.md) | Performance tuning |
+| [Kernel Tuning](docs/performance/kernel_tuning.md) | Hardware-specific optimizations |
+| [API Reference](docs/getting-started/setup-guide.md#api-usage) | API endpoints and usage |
 
 ## 🔬 Implementation Details
 

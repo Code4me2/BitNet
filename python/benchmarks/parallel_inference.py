@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Parallel inference example for BitNet using 12-core threading
+Parallel inference example for BitNet using multi-core threading
 Demonstrates how to process multiple prompts efficiently
 """
 import concurrent.futures
@@ -76,7 +76,7 @@ def parallel_inference(prompts: List[str], max_tokens: int = 50, strategy: str =
     print(f"   Strategy: {strategy}")
     print(f"   Workers: {max_workers}")
     print(f"   Threads per worker: {threads_per_worker}")
-    print(f"   Total threads used: {total_threads}/12")
+    print(f"   Total threads used: {total_threads}/10")  # Using 10 threads for optimal performance
     print(f"   Processing {len(prompts)} prompts...")
     print("-" * 50)
     

@@ -952,12 +952,18 @@ class LlamaModel(Model):
                 raise ValueError(f"Unprocessed experts: {experts}")
 
 
-@Model.register("BitnetForCausalLM")
+@Model.register("BitnetForCausalLM", "BitNetForCausalLM")
 class BitnetModel(Model):
     model_arch = gguf.MODEL_ARCH.BITNET
 
     def set_vocab(self):
-        self._set_vocab_sentencepiece()
+        try:
+            self._set_vocab_sentencepiece()
+        except FileNotFoundError:
+            try:
+                self._set_vocab_llama_hf()
+            except TypeError:
+                self._set_vocab_gpt2()
         
     def set_gguf_parameters(self):
         super().set_gguf_parameters()
@@ -974,14 +980,47 @@ class BitnetModel(Model):
         result = (weight * s).round().clamp(-1, 1) / s
         return result.type(dtype)
 
+    def map_tensor_name(self, name: str, try_suffixes: Sequence[str] = (".weight", ".bias")) -> str:
+        # Custom mapping for BitNet tensors
+        if "weight_scale" in name:
+            # Skip scale tensors for now, BitNet.cpp doesn't use them directly
+            return None
+        
+        # Map HuggingFace names to GGUF names
+        name = name.replace("model.", "")
+        name = name.replace("embed_tokens", "token_embd")
+        name = name.replace("layers.", "blk.")
+        name = name.replace("input_layernorm", "attn_norm")
+        name = name.replace("post_attention_layernorm", "ffn_norm")
+        name = name.replace("self_attn.", "")
+        name = name.replace("mlp.", "")
+        name = name.replace("lm_head", "output")
+        
+        # Fix final layer norm - server expects output_norm.weight
+        if name == "norm.weight":
+            name = "output_norm.weight"
+        
+        return name
+
     def modify_tensors(self, data_torch: Tensor, name: str, bid: int | None) -> Iterable[tuple[str, Tensor]]:
+        # Skip scale tensors
+        if "weight_scale" in name:
+            return []
+        
+        # Skip sub-norms for now
+        if "sub_norm" in name:
+            return []
+            
         # quant weight to i2 (in fp16)
         if name.endswith(("q_proj.weight", "k_proj.weight", "v_proj.weight", 
                           "down_proj.weight", "up_proj.weight", "gate_proj.weight",
                           "o_proj.weight")):
             data_torch = self.weight_quant(data_torch)
 
-        return [(self.map_tensor_name(name), data_torch)]
+        mapped_name = self.map_tensor_name(name)
+        if mapped_name is None:
+            return []
+        return [(mapped_name, data_torch)]
 
     def write_tensors(self):
         max_name_len = max(len(s) for _, s in self.tensor_map.mapping.values()) + len(".weight,")

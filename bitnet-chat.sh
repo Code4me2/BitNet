@@ -4,9 +4,9 @@
 # Easy-to-use script to start the BitNet chat interface
 #
 
-# Set thread optimization for 12-core CPU
-export OMP_NUM_THREADS=12
-export MKL_NUM_THREADS=12
+# Set thread optimization (10 threads found to be optimal)
+export OMP_NUM_THREADS=10
+export MKL_NUM_THREADS=10
 
 # Colors for output
 GREEN='\033[0;32m'

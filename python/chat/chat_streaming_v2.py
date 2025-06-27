@@ -24,7 +24,8 @@ class BitNetStreamingChatV2:
         self.max_tokens = 200
         
         # Set environment
-        os.environ['OMP_NUM_THREADS'] = '12'
+        # Using 10 threads for optimal performance
+        os.environ['OMP_NUM_THREADS'] = '10'
         
         # Determine llama-cli path
         if os.name == 'nt':
@@ -83,7 +84,7 @@ class BitNetStreamingChatV2:
             "-p", full_prompt,
             "-n", str(self.max_tokens),
             "--temp", str(self.temperature),
-            "-t", "12",
+            "-t", "10",  # Using 10 threads for optimal performance
             "--top-k", "40",
             "--top-p", "0.95",
             "--repeat-penalty", "1.1",

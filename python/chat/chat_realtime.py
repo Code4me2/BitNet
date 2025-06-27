@@ -19,7 +19,8 @@ class BitNetRealtimeChat:
         self.temperature = 0.7
         self.max_tokens = 200
         
-        os.environ['OMP_NUM_THREADS'] = '12'
+        # Using 10 threads for optimal performance
+        os.environ['OMP_NUM_THREADS'] = '10'
         
     def print_header(self):
         """Print chat header"""
@@ -48,7 +49,7 @@ class BitNetRealtimeChat:
             "-p", full_prompt,
             "-n", str(self.max_tokens),
             "-temp", str(self.temperature),
-            "-t", "12"
+            "-t", "10"  # Using 10 threads for optimal performance
         ]
         
         # Set up for real-time output capture

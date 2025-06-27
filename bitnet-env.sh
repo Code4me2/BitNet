@@ -13,7 +13,8 @@ if [ -z "$BITNET_THREADS" ]; then
     else
         CPU_CORES=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || echo 12)
     fi
-    BITNET_THREADS=$([ $CPU_CORES -gt 12 ] && echo 12 || echo $CPU_CORES)
+    # Optimal performance found at 10 threads
+    BITNET_THREADS=$([ $CPU_CORES -gt 10 ] && echo 10 || echo $CPU_CORES)
 fi
 
 # Set thread-related environment variables

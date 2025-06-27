@@ -15,7 +15,8 @@ def run_benchmark(prompt, num_runs=5):
         
         # Set environment variables
         env = os.environ.copy()
-        env['OMP_NUM_THREADS'] = '12'
+        # Using 10 threads for optimal performance
+        env['OMP_NUM_THREADS'] = '10'
         
         result = subprocess.run([
             "python3", "run_inference.py",
@@ -56,7 +57,7 @@ def run_benchmark(prompt, num_runs=5):
 print("BitNet B1.58 2B4T Performance Benchmark")
 print("=" * 50)
 print(f"CPU: Intel 12-core")
-print(f"Threads: {os.environ.get('OMP_NUM_THREADS', '12')}")
+print(f"Threads: {os.environ.get('OMP_NUM_THREADS', '10')}")
 print("=" * 50)
 
 prompts = [
